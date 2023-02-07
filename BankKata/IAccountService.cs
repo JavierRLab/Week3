@@ -16,14 +16,14 @@ public interface IAccountService
 public class AccountService : IAccountService
 {
     public ITransactionService TransactionService;
-    public IReaderAccountService ReaderAccountService;
+    public IFormatTransactionService FormatTransactionService;
 
     private ListDictionary transactions = new ListDictionary();
 
-    public AccountService(ITransactionService transactionService, IReaderAccountService readerAccountService)
+    public AccountService(ITransactionService transactionService, IFormatTransactionService formatTransactionService)
     {
         TransactionService = transactionService;
-        ReaderAccountService = readerAccountService;
+        FormatTransactionService = formatTransactionService;
     }
 
     public void Deposit(int amount)
@@ -42,9 +42,9 @@ public class AccountService : IAccountService
     }
 }
 
-public interface IReaderAccountService
+public interface IFormatTransactionService
 {
-    string PrintStatement();
+    string FormatTransaction();
 }
 
 public interface ITransactionService
