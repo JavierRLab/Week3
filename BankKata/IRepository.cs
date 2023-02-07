@@ -1,5 +1,3 @@
-using BankKata.Tests;
-
 namespace BankKata;
 
 public interface IRepository
