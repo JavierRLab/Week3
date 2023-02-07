@@ -1,23 +1,29 @@
-using System.Collections.Specialized;
-
-namespace BankKata.Tests;
+namespace BankKata;
 
 public class TransactionService : ITransactionService
 {
-    public IRepository Repository;
-    
+    private readonly IRepository _repository;
+    public DateTime TransactionDate { get; set; }
+
     public TransactionService(IRepository repository)
     {
-        this.Repository = repository;
+        this._repository = repository;
+        TransactionDate = DateTime.Now;
     }
 
     public void Deposit(int amount)
     {
-        Repository.Save(new Transaction(new DateTime(), amount));
+        _repository.Save(new Transaction(TransactionDate, amount));
     }
+
 
     public void Withdraw(int amount)
     {
-        Repository.Save(new Transaction(new DateTime(), amount*(-1)));;
+        _repository.Save(new Transaction(TransactionDate, -amount));;
+    }
+
+    public List<Transaction> GetTransactions()
+    {
+        return _repository.GetTransactions();
     }
 }

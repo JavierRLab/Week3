@@ -51,5 +51,7 @@ public interface ITransactionService
 {
     void Deposit(int amount);
     void Withdraw(int amount);
-    
+
+    List<Transaction> GetTransactions();
+
 }
