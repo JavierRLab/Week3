@@ -1,15 +1,11 @@
-namespace BattleShipsKata.Tests;
+﻿namespace BattleShipsKata.Tests;
 
-public class AcceptanceTests
+public class PlayerShould
 {
-    [Fact]
-    public void AddPlayer()
+    [Fact(DisplayName = "initialize board with ships")]
+    public void Test1()
     {
-        var writer = new StringWriter();
-        Console.SetOut(writer);
-
-        var battleShipsGame = new BattleShipsGame(10,10);
-        battleShipsGame.Add("Player1");
+        var player = new Player("Player1", 10, 10);
         var carrier = new ShipType('c', 4);
         var destroyer = new ShipType('d', 3);
         var gunship = new ShipType('g', 1);
@@ -23,9 +19,7 @@ public class AcceptanceTests
             new Ship(9, 9, gunship)
             
         };
-
-        battleShipsGame.Start(ships);
-        battleShipsGame.Print();
+        player.FillBoard(ships);
         
         var expectedBoardForPlayer1 =
             @"  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
@@ -41,6 +35,6 @@ public class AcceptanceTests
                9|   |   |   |   |   | d |   |   |   | g |";
         
         
-        Assert.Equal(expectedBoardForPlayer1, writer.ToString());
+        Assert.Equal(expectedBoardForPlayer1, player.GetBoardMessage());
     }
 }
